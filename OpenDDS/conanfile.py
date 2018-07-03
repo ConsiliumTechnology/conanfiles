@@ -99,10 +99,11 @@ class OpenDDSConan(ConanFile):
         with append_to_env_variable("PATH", os.path.join(working_dir, 'lib'), ';', prepend=True):
             with append_to_env_variable("PATH", os.path.join(working_dir, 'bin'), ';', prepend=True):
                 msbuild = MSBuild(self)
-                # TODO: [bug in Conan.io?] Under investigation
-                tools.replace_in_file(os.path.join(working_dir, 'DDS_no_tests.sln'), "Release|Win32", "Release|x86_64")
-                tools.replace_in_file(os.path.join(working_dir, 'DDS_no_tests.sln'), "Debug|Win32", "Debug|x86_64")
-                msbuild.build(os.path.join(working_dir, 'DDS_no_tests.sln'), upgrade_project=False)
+                sln = os.path.join(working_dir, 'DDS_no_tests.sln')
+                # for build_type='Debug' build release first
+                if self.settings.build_type == 'Debug':
+                    msbuild.build(sln, build_type='Release', upgrade_project=False)
+                msbuild.build(sln, upgrade_project=False)
 
     def build_linux(self, working_dir):
         assert self.settings.os == "Linux"

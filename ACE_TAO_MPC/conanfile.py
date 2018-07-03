@@ -130,10 +130,11 @@ class AceTaoConan(ConanFile):
         # Do we want the .sln files to have the names represent the vs version being used?
         with append_to_env_variable("PATH", os.path.join(working_dir, 'lib'), ';', prepend=True):
             msbuild = MSBuild(self)
-            # TODO: [bug in Conan.io?] Under investigation
-            tools.replace_in_file(os.path.join(working_dir, 'TAO', 'TAO_ACE.sln'), "Release|Win32", "Release|x86_64")
-            tools.replace_in_file(os.path.join(working_dir, 'TAO', 'TAO_ACE.sln'), "Debug|Win32", "Debug|x86_64")
-            msbuild.build(os.path.join(working_dir, 'TAO', 'TAO_ACE.sln'), upgrade_project=False)
+            sln = os.path.join(working_dir, 'TAO', 'TAO_ACE.sln')
+            # for build_type='Debug' build release first
+            if self.settings.build_type == 'Debug':
+                msbuild.build(sln, build_type='Release', upgrade_project=False)
+            msbuild.build(sln, upgrade_project=False)
 
     def build_linux(self, working_dir):
         assert self.settings.os == "Linux"
