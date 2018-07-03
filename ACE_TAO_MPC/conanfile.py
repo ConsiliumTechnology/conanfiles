@@ -36,9 +36,7 @@ class AceTaoConan(ConanFile):
     short_paths = True
 
     def build_requirements(self):
-        print(str(self.settings.os))
         if self.settings.os == "Windows":
-            print(str(self.settings.os))
             self.build_requires('strawberryperl/5.26.0@conan/stable')
 
     def configure(self):

@@ -41,7 +41,7 @@ class OpenDDSConan(ConanFile):
             self.build_requires('strawberryperl/5.26.0@conan/stable')
 
     def configure(self):
-        self.requires('ACE_TAO_MPC/6.4.8@artifactory/package')
+        self.requires('ACE_TAO_MPC/6.4.8@lasagne/stable')
 
         if self.settings.os not in ["Windows", "Linux", "Macos"]:
             raise ConanException("Recipe for settings.os='{}' not implemented.".format(self.settings.os))
