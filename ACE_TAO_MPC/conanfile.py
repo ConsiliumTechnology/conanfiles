@@ -23,7 +23,7 @@ def append_to_env_variable(var, value, separator, prepend=False):
 
 class AceTaoConan(ConanFile):
     name = "ACE_TAO_MPC"
-    version = "6.4.8" #make this automatic
+    version = "6.5.2" #make this automatic
     license = ""
     url = "https://github.com/DOCGroup/ACE_TAO"
     description = "ACE, TAO and MPC all compiled, and running in the setup used for LASAGNE Development"
@@ -58,7 +58,7 @@ class AceTaoConan(ConanFile):
             for name in names:
                 srcname = os.path.join('source_subfolder', name)
                 shutil.move(srcname, '.')
-            
+
         if os.path.isdir('LAS_Config_files') == False:
             source_url = "https://github.com/LASAGNE-Open-Systems/LASAGNE-Core/archive/v"
             tools.get("{0}{1}.tar.gz".format(source_url, las_version))
