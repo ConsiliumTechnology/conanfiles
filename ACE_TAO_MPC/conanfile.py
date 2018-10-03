@@ -51,7 +51,7 @@ class AceTaoConan(ConanFile):
 
         if os.path.isdir('ace') == False:
             source_url = "https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO"
-            tools.get("{0}-{1}/ACE.TAO-src.tar.gz".format(source_url, version))
+            tools.get("{0}-{1}/ACE+TAO-src.tar.gz".format(source_url, version))
             os.rename('ACE_Wrappers', self.source_subfolder)
 
             names = os.listdir('source_subfolder')
