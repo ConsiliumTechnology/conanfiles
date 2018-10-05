@@ -25,7 +25,7 @@ def append_to_env_variable(var, value, separator, prepend=False):
 
 class OpenDDSConan(ConanFile):
     name = "OpenDDS"
-    version = "3.12.2"
+    version = "3.13"
     #license = "<Put the package license here>"
     #url = "<Package recipe repository url here, for issues about the package>"
     description = "At this stage, a test of getting a Conan package of OpenDDS"
@@ -41,7 +41,7 @@ class OpenDDSConan(ConanFile):
             self.build_requires('strawberryperl/5.26.0@conan/stable')
 
     def configure(self):
-        self.requires('ACE_TAO_MPC/6.4.8@lasagne/stable')
+        self.requires('ACE_TAO_MPC/6.5.2@lasagne/stable')
 
         if self.settings.os not in ["Windows", "Linux", "Macos"]:
             raise ConanException("Recipe for settings.os='{}' not implemented.".format(self.settings.os))
@@ -53,10 +53,10 @@ class OpenDDSConan(ConanFile):
 #        version = self.version.replace('.', '_')
 
         if os.path.isdir('DDS') == False:
-#            https://github.com/objectcomputing/OpenDDS/archive/DDS-3.12.2.tar.gz
+#            https://github.com/objectcomputing/OpenDDS/archive/DDS-3.13.tar.gz
             source_url = "https://github.com/objectcomputing/OpenDDS/archive/DDS"
             tools.get("{0}-{1}.tar.gz".format(source_url, self.version))
-            os.rename('OpenDDS-DDS-3.12.2', self.source_subfolder)
+            os.rename('OpenDDS-DDS-3.13', self.source_subfolder)
 
             names = os.listdir('source_subfolder')
             for name in names:
